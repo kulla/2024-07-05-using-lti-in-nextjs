@@ -3,14 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "run-s start:mongo dev:next",
+    "dev": "run-p start:mongo dev:next",
     "dev:next": "next dev",
     "build": "next build",
     "format": "prettier --write .",
-    "start": "run-s start:mongo start:next",
+    "start": "run-p start:mongo start:next",
     "start:next": "next start",
     "start:mongo": "docker compose -f docker-compose.yml up",
-    "stop": "docker compose -f docker-compose.yml down",
     "lint": "next lint"
   },
   "dependencies": {
