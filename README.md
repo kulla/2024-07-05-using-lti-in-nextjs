@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Example app for testing the usage of [`ltijs`](https://www.npmjs.com/package/ltijs) in Next.JS
 
-## Getting Started
+In this repo I want to answer the question: How can I use `ltijs` in a Next.JS
+app?
 
-First, run the development server:
+## Solution 1: Usage of Next.JS middleware
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The first solution is to utilize the
+[Next.JS middleware](https://nextjs.org/docs/pages/building-your-application/routing/middleware)
+to handle the LTI requests. While this is the most straightforward approach, it
+does not work due to the following circumstances:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. The middleware uses the
+   [Edge Runtime](https://nextjs.org/docs/app/building-your-application/rendering/edge-and-nodejs-runtimes)
+   which does not support Node.js modules. However `ltijs` uses thoese modules.
+   When you run `yarn dev` with
+   [`middleware.ts`](https://github.com/kulla/2024-07-05-using-lti-in-nextjs/blob/41e29f2501a546a02dcc0483b74b8cde7f6e5a33/src/middleware.ts)
+   one gets the error
+   `Error: The edge runtime does not support Node.js 'http' module.`
+2. The Next.JS middleware uses a API based on
+   [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
+   However `ltijs` uses the [Express.js](https://expressjs.com/) API which is
+   based on the request and response implementations of Node.JS.
