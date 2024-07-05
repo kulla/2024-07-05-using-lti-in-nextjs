@@ -13,11 +13,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "ltijs": "^5.9.5",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/ltijs": "^4.0.11",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
