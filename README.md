@@ -21,3 +21,16 @@ does not work due to the following circumstances:
    [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
    However `ltijs` uses the [Express.js](https://expressjs.com/) API which is
    based on the request and response implementations of Node.JS.
+
+## Solution 2: Usage of route handler
+
+Instead of a middleware, we can use a
+[route handler](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
+to handle the LTI requests. Those also work in a Node.JS runtime so that `ltijs`
+can be loaded. However the new route handler use still the fetch API which is
+not compatible with the Express.js API of `ltijs`.
+[`lti/[endpoint]/route.ts`](https://github.com/kulla/2024-07-05-using-lti-in-nextjs/blob/main/src/app/lti/%5Bendpoint%5D/route.ts)
+show a short attempt to mock the express request and response objects. However
+this seems to be a lot of work (since the inner model of express request /
+response is quite different from the fetch API). It might be easier to implement
+LTI from scratch in this case.
