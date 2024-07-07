@@ -1,5 +1,0 @@
-services:
-  mongo:
-    image: mongo:latest
-    expose:
-      - 27017
