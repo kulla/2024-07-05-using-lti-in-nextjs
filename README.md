@@ -34,3 +34,11 @@ show a short attempt to mock the express request and response objects. However
 this seems to be a lot of work (since the inner model of express request /
 response is quite different from the fetch API). It might be easier to implement
 LTI from scratch in this case.
+
+## Solution 3: Usage of NextAuth.JS
+
+I only started testing the usage of [NextAuth.JS](https://next-auth.js.org/) for
+LTI. Since LTI directely extends OAuth this might be a good solution. The file
+[`[...nextauth].ts`](https://github.com/kulla/2024-07-05-using-lti-in-nextjs/blob/main/src/pages/api/auth/%5B...nextauth%5D.ts)
+contains my current work in progress. This seems to be possible but I have the
+feeling it takes 3-4 days to make it actually working.
